@@ -46,7 +46,43 @@ class ZipHandler {
         header('Content-Length: ' . filesize($zip));
         readfile($zip);
         unlink($zip);
+    }
 
+    public function extract($zip, $directory){
+        $zip = new ZipArchive();
+        $zip->open($zip);
+        $zip->extractTo($directory);
+        $zip->close();
+    }
+
+    public function listFiles($zip){
+        $zip = new ZipArchive();
+        $zip->open($zip);
+        $files = [];
+        for($i = 0; $i < $zip->numFiles; $i++){
+            $files[] = $zip->getNameIndex($i);
+        }
+        $zip->close();
+        return $files;
+    }
+
+    public function listDirectories($zip){
+        $zip = new ZipArchive();
+        $zip->open($zip);
+        $directories = [];
+        for($i = 0; $i < $zip->numFiles; $i++){
+            $directories[] = dirname($zip->getNameIndex($i));
+        }
+        $zip->close();
+        return array_unique($directories);
+    }
+
+    // add file to zip
+    public function addFile($zip, $file){
+        $zip = new ZipArchive();
+        $zip->open($zip);
+        $zip->addFile($file);
+        $zip->close();
     }
 
 }
