@@ -24,12 +24,25 @@ require_once 'ZipHandler.php';
     exit;
 }
 */
-
-
+// image scaler example
 try {
+    $zipHandler = new ZipHandler();
+    // stuurt een zip bestand naar de browser om te downloaden
+    $zipHandler->download(__DIR__ . '/images', 'voorbeeld');
+    // maakt een zip bestand aan in de opgegeven directory
+    $zipHandler->create(__DIR__ . '/images', 'voorbeeld');
+} catch (Exception $e){
+    echo $e->getMessage();
+    exit;
+}
+
+
+
+
+/*try {
     $zip = new ZipHandler();
     $zip->download(__DIR__ . '/images', 'zip');
 } catch (Exception $e){
     echo $e->getMessage();
     exit;
-}
+}*/

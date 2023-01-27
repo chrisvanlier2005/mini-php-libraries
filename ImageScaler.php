@@ -56,6 +56,7 @@ class ImageScaler
 
     /**
      * @throws Exception
+     * @param $quality int 1 - 100
      */
     public function toBrowser($quality = 1)
     {
